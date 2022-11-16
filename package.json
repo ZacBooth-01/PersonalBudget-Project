@@ -1,0 +1,11 @@
+{
+  "name": "personalbudget-project",
+  "version": "1.0.0",
+  "description": "Codecademy Personal Budget Project",
+  "main": "index.js",
+  "author": "Zac Booth",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
