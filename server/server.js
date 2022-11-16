@@ -8,9 +8,6 @@ app.use(bodyParser.json())
 app.use('/envelopes', EnvelopeRouter)
 
 
-
-
-
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
 })

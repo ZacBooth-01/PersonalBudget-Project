@@ -7,4 +7,9 @@ const getElementByID = (id) => {
     })
 }
 
-module.exports = { getElementByID }
+const nextID = () => {
+    console.log(envelopes)
+    return ((Number(envelopes[envelopes.length - 1].id)) + 1)
+}
+
+module.exports = { getElementByID, nextID }
