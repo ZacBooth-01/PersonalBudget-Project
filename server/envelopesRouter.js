@@ -23,7 +23,6 @@ envelopeRouter.get('/:id', (req, res, next) => {
 })
 
 envelopeRouter.post('/', (req, res, next) => {
-    console.log(parseInt(req.body.budget))
     if(req.body.title && !isNaN(parseInt(req.body.budget))){
         let newEnvelope = {
             id: nextID(),
