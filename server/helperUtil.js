@@ -8,7 +8,10 @@ const getElementByID = (id) => {
 }
 
 const nextID = () => {
-    return ((Number(envelopes[envelopes.length - 1].id)) + 1)
+    if(envelopes.length === 0) {
+        return 1;
+    }else {
+        return ((Number(envelopes[envelopes.length - 1].id)) + 1)}
 }
 
 module.exports = { getElementByID, nextID }

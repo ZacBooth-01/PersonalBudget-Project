@@ -23,13 +23,19 @@ envelopeRouter.get('/:id', (req, res, next) => {
 })
 
 envelopeRouter.post('/', (req, res, next) => {
-    let newEnvelope = {
-        id: nextID(),
-        title: req.body.title,
-        budget: req.body.budget
+    console.log(parseInt(req.body.budget))
+    if(req.body.title && !isNaN(parseInt(req.body.budget))){
+        let newEnvelope = {
+            id: nextID(),
+            title: req.body.title,
+            budget: req.body.budget
+        }
+        addToDatabase(newEnvelope)
+        res.status(201).send(newEnvelope)
+    } else{
+        res.status(400).send('Missing Parameter or parameter is not correct input.')
     }
-    addToDatabase(newEnvelope)
-    res.send(newEnvelope)
+
 })
 
 
