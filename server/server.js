@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const bodyParser = require('body-parser')
-const EnvelopeRouter = require('./envelopesRouter')
+const envelopeRouter = require('./envelopesRouter')
 
 app.use(bodyParser.json())
-app.use('/envelopes', EnvelopeRouter)
+app.use('/envelopes', envelopeRouter)
 
 
 app.listen(PORT, () => {
