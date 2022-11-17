@@ -45,7 +45,6 @@ envelopeRouter.post('/transfer', (req, res, next) => {
     if(firstElement && secondElement) {
         let newBudget1 = firstElement.budget - amount;
         let newBudget2 = secondElement.budget + Number(amount);
-        console.log(newBudget2)
         updateElement('budget', firstElement, newBudget1, envelopes);
         updateElement('budget', secondElement, newBudget2, envelopes)
         res.status(200).send('Transfer Complete')
