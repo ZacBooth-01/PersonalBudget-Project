@@ -1,8 +1,8 @@
 const express = require('express');
 const envelopeRouter = express.Router();
-const { envelopes } = require('./envelopesDB')
+const {envelopes} = require('./envelopesDB')
 const { getElementByID, nextID } = require('./helperUtil')
-const { addToDatabase } = require('./envelopesDB')
+const { addToDatabase, deleteFromDatabase } = require('./envelopesDB')
 
 const checkInArray = (paramId) => {
     let inArray = envelopes.find(el => el.id === Number(paramId))
@@ -15,7 +15,7 @@ envelopeRouter.get('/', (req, res, next) => {
 
 envelopeRouter.get('/:id', (req, res, next) => {
     if(checkInArray(req.params.id)){
-        res.send(getElementByID(req.params.id))
+        res.send(getElementByID(req.params.id, envelopes))
     } else{
         res.status(404).send()
     }
@@ -23,10 +23,9 @@ envelopeRouter.get('/:id', (req, res, next) => {
 })
 
 envelopeRouter.post('/', (req, res, next) => {
-    console.log(parseInt(req.body.budget))
     if(req.body.title && !isNaN(parseInt(req.body.budget))){
         let newEnvelope = {
-            id: nextID(),
+            id: nextID(envelopes),
             title: req.body.title,
             budget: req.body.budget
         }
@@ -36,6 +35,11 @@ envelopeRouter.post('/', (req, res, next) => {
         res.status(400).send('Missing Parameter or parameter is not correct input.')
     }
 
+})
+
+envelopeRouter.delete('/:id', (req, res, next) => {
+    deleteFromDatabase(req.params.id, envelopes)
+    res.status(200).send(`Number ${Number(req.params.id)} has been deleted.`)
 })
 
 

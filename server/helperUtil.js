@@ -1,17 +1,20 @@
-const { envelopes } = require("./envelopesDB")
-
-
-const getElementByID = (id) => {
-    return envelopes.find(el => {
+const getElementByID = (id, array) => {
+    return array.find(el => {
         return el.id === Number(id);
     })
 }
 
-const nextID = () => {
-    if(envelopes.length === 0) {
-        return 1;
-    }else {
-        return ((Number(envelopes[envelopes.length - 1].id)) + 1)}
+const getElementIndexByID = (id, array) => {
+    return array.findIndex(el => {
+        return el.id === Number(id);
+    })
 }
 
-module.exports = { getElementByID, nextID }
+const nextID = (array) => {
+    if(array.length === 0) {
+        return 1;
+    }else {
+        return ((Number(array[array.length - 1].id)) + 1)}
+}
+
+module.exports = { getElementByID, nextID, getElementIndexByID }
