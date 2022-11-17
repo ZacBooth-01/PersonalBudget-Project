@@ -28,7 +28,7 @@ Accessing the API: add /envelopes to the end of localhost:3000.
  2. To get a specific envelope by ID send a GET request to /envelopes/(ID).
 + POST:
  1. To add a envelope to the database. Send a POST request to /envelopes. Include a JSON object as a body eg. {"title": "Envelope 1", "budget": "2000"}.
- 2. To transfer between two envelopes. Send a POST request to /envelopes/transfer with a query which includes to id to move money from to the id to move it to and the amount to move. eg localhost:3000/envelopes/transfer?fromId=1&toId=2&amount=500.
+ 2. To transfer between two envelopes. Send a POST request to /envelopes/transfer with a query which includes "to id" to move money from to the "from id" to move it to and the amount to move. eg localhost:3000/envelopes/transfer?fromId=1&toId=2&amount=500.
 + PUT:
  1. To update a specific envelope. Send a PUT request to /envelopes/(ID) with a query which includes the property you would like to change ie. title or budget and what you would like to change it to. eg localhost:3000/envelopes/1?changeProp=title&changeItem=Envelope1.
 + DELETE:
