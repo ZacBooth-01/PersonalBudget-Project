@@ -2,7 +2,8 @@ const express = require('express');
 const envelopeRouter = express.Router();
 const {envelopes} = require('./envelopesDB')
 const { getElementByID, nextID } = require('./helperUtil')
-const { addToDatabase, deleteFromDatabase, updateElement } = require('./envelopesDB')
+const { addToDatabase, deleteFromDatabase, updateElement } = require('./envelopesDB');
+const e = require('express');
 
 const checkInArray = (paramId) => {
     let inArray = envelopes.find(el => el.id === Number(paramId))
@@ -35,6 +36,22 @@ envelopeRouter.post('/', (req, res, next) => {
         res.status(400).send('Missing Parameter or parameter is not correct input.')
     }
 
+})
+
+envelopeRouter.post('/transfer', (req, res, next) => {
+    let firstElement = getElementByID(req.query.fromId, envelopes);
+    let secondElement = getElementByID(req.query.toId, envelopes);
+    let amount = req.query.amount;
+    if(firstElement && secondElement) {
+        let newBudget1 = firstElement.budget - amount;
+        let newBudget2 = secondElement.budget + Number(amount);
+        console.log(newBudget2)
+        updateElement('budget', firstElement, newBudget1, envelopes);
+        updateElement('budget', secondElement, newBudget2, envelopes)
+        res.status(200).send('Transfer Complete')
+    } else {
+        res.status(404).send('Missing Query')
+    }
 })
 
 envelopeRouter.put('/:id', (req, res, next) => {
