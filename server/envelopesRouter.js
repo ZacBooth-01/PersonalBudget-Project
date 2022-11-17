@@ -2,7 +2,7 @@ const express = require('express');
 const envelopeRouter = express.Router();
 const {envelopes} = require('./envelopesDB')
 const { getElementByID, nextID } = require('./helperUtil')
-const { addToDatabase, deleteFromDatabase } = require('./envelopesDB')
+const { addToDatabase, deleteFromDatabase, updateElement } = require('./envelopesDB')
 
 const checkInArray = (paramId) => {
     let inArray = envelopes.find(el => el.id === Number(paramId))
@@ -33,6 +33,19 @@ envelopeRouter.post('/', (req, res, next) => {
         res.status(201).send(newEnvelope)
     } else{
         res.status(400).send('Missing Parameter or parameter is not correct input.')
+    }
+
+})
+
+envelopeRouter.put('/:id', (req, res, next) => {
+    if(checkInArray(req.params.id)){
+        let elementToChange = getElementByID(req.params.id, envelopes)
+        let properyToChange = req.query.changeProp;
+        let changeToMake = req.query.changeItem;
+        updateElement(properyToChange, elementToChange, changeToMake, envelopes);
+        res.status(200).send(getElementByID(req.params.id, envelopes))
+    } else {
+        res.status(404).send('Element with ID not found')
     }
 
 })
